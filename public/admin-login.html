@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HATTAH Admin Login</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body class="admin-login-page">
+    <main class="admin-login-wrap">
+      <section class="admin-login-brand">
+        <h1 class="brand-logo">HAT<span>TAH</span> Admin</h1>
+        <h2 class="brand-title">Commerce Command Center</h2>
+        <p class="brand-subtitle">
+          Monitor every order request, manage fulfillment workflow, and track seller
+          onboarding from one production-grade dashboard.
+        </p>
+        <ul class="brand-list">
+          <li>Real-time order feed with status tracking</li>
+          <li>Admin pipeline controls for processing and fulfillment</li>
+          <li>Seller application visibility and quick review</li>
+          <li>Overview metrics similar to enterprise ecommerce back offices</li>
+        </ul>
+      </section>
+
+      <section class="admin-login-card">
+        <div class="login-card-shell">
+          <h2 class="login-title">Secure Admin Access</h2>
+          <p class="login-subtitle">Sign in with your admin credentials to continue.</p>
+
+          <form id="adminLoginForm">
+            <div>
+              <label class="form-label" for="adminEmail">Admin Email</label>
+              <input
+                id="adminEmail"
+                class="form-control"
+                type="email"
+                name="email"
+                value="sahaadi708@gmail.com"
+                required
+              />
+            </div>
+
+            <div class="stack-gap">
+              <label class="form-label" for="adminPassword">Password</label>
+              <input
+                id="adminPassword"
+                class="form-control"
+                type="password"
+                name="password"
+                placeholder="Enter admin password"
+                required
+              />
+            </div>
+
+            <div class="stack-gap">
+              <button class="btn btn-primary" id="loginButton" type="submit">
+                Login to Dashboard
+              </button>
+            </div>
+
+            <div id="loginAlert" class="alert"></div>
+            <p class="helper">
+              Admin login id is fixed to sahaadi708@gmail.com.
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/admin-login.js"></script>
+  </body>
+</html>

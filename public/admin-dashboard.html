@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HATTAH Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="sidebar">
+        <h2>HAT<span>TAH</span> Admin</h2>
+        <p id="adminEmailDisplay">admin@hattah</p>
+
+        <nav class="side-nav">
+          <a class="side-link active" href="#overview">Overview</a>
+          <a class="side-link" href="#orders">Orders</a>
+          <a class="side-link" href="#sellers">Seller Applications</a>
+          <a class="side-link" href="/index.html">Back to Store</a>
+        </nav>
+
+        <button id="logoutButton" class="logout-btn" type="button">Logout</button>
+      </aside>
+
+      <main class="main">
+        <section id="overview" class="topbar">
+          <h1>Admin Operations Dashboard</h1>
+          <p>
+            Detailed commerce operations panel for order requests and seller pipeline.
+          </p>
+        </section>
+
+        <section class="metrics" id="metricsGrid">
+          <article class="metric">
+            <h3>Total Orders</h3>
+            <strong id="metricOrders">0</strong>
+          </article>
+          <article class="metric">
+            <h3>Total Products</h3>
+            <strong id="metricProducts">0</strong>
+          </article>
+          <article class="metric">
+            <h3>Total Sellers</h3>
+            <strong id="metricSellers">0</strong>
+          </article>
+          <article class="metric">
+            <h3>Pipeline Revenue</h3>
+            <strong id="metricRevenue">INR 0</strong>
+          </article>
+        </section>
+
+        <section class="section-card" id="orders">
+          <div class="section-head">
+            <h2>Order Management</h2>
+            <div class="toolbar">
+              <input
+                id="orderSearch"
+                class="form-control"
+                type="text"
+                placeholder="Search by customer, phone, address"
+              />
+              <select id="orderStatusFilter" class="form-control" title="Filter orders by status">
+                <option value="all">All Status</option>
+                <option value="new">New</option>
+                <option value="processing">Processing</option>
+                <option value="fulfilled">Fulfilled</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <button id="refreshOrdersButton" class="btn-ghost" type="button">Refresh</button>
+            </div>
+          </div>
+
+          <div class="status-grid" id="statusSummary"></div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Contact</th>
+                  <th>Product</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Placed At</th>
+                  <th>Admin Action</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <tr>
+                  <td colspan="7">Loading orders...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <button id="prevPageButton" class="btn-ghost" type="button">Previous</button>
+            <button id="nextPageButton" class="btn-ghost" type="button">Next</button>
+            <span id="paginationInfo" class="pagination-info">Page 1 of 1</span>
+          </div>
+
+          <div id="ordersAlert" class="alert"></div>
+        </section>
+
+        <section class="section-card" id="sellers">
+          <div class="section-head">
+            <h2>Recent Seller Applications</h2>
+            <span class="small">Latest 20 submissions</span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Brand</th>
+                  <th>Instagram</th>
+                  <th>Category</th>
+                  <th>Contact</th>
+                  <th>Sample Link</th>
+                  <th>Submitted At</th>
+                </tr>
+              </thead>
+              <tbody id="sellersTableBody">
+                <tr>
+                  <td colspan="6">Loading seller applications...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/admin-dashboard.js"></script>
+  </body>
+</html>

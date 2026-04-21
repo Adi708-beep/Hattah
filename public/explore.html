@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore Products | HATTAH</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="announce">
+      <div class="container announce-inner">
+        <p>Shop curated finds from underrated sellers. New products added weekly.</p>
+        <a href="/index.html">Back To Home</a>
+      </div>
+    </div>
+
+    <header class="navbar">
+      <div class="container nav-wrapper">
+        <a class="logo" href="/index.html">HAT<span>TAH</span></a>
+        <button class="nav-toggle" aria-label="Toggle Menu">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a data-nav href="/index.html">Home</a></li>
+          <li><a data-nav href="/explore.html">Explore</a></li>
+          <li><a data-nav href="/sellers.html">Sellers</a></li>
+          <li><a data-nav href="/how-it-works.html">How It Works</a></li>
+        </ul>
+        <div class="nav-search">
+          <input class="search-input" type="text" placeholder="Search products" />
+        </div>
+        <div class="nav-actions">
+          <button class="icon-btn" aria-label="Search">S</button>
+          <button class="icon-btn" aria-label="Wishlist">♡</button>
+          <button class="icon-btn badged" aria-label="Bag">B</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <div class="page-head">
+          <span class="eyebrow">Curated Storefront</span>
+          <h1 class="section-title">Explore Products</h1>
+        </div>
+        <p class="section-subtitle">
+          Filter by category and price to find the right product faster.
+        </p>
+
+        <div class="shop-layout">
+          <aside class="card filter-panel sticky-panel">
+            <section class="filters">
+              <div class="filter-grid">
+                <div>
+                  <label class="label" for="searchInput">Search</label>
+                  <input
+                    id="searchInput"
+                    class="input"
+                    type="text"
+                    placeholder="Product, seller, description"
+                  />
+                </div>
+
+                <div>
+                  <label class="label" for="categoryFilter">Category</label>
+                  <select id="categoryFilter" class="select" title="Category filter">
+                    <option value="">All Categories</option>
+                  </select>
+                </div>
+
+                <div class="grid grid-two">
+                  <input id="minPrice" class="input" type="number" min="0" placeholder="Min ₹" />
+                  <input id="maxPrice" class="input" type="number" min="0" placeholder="Max ₹" />
+                </div>
+
+                <div>
+                  <label class="label" for="sortSelect">Sort By</label>
+                  <select id="sortSelect" class="select" title="Sort products">
+                    <option value="featured">Featured</option>
+                    <option value="priceLow">Price: Low to High</option>
+                    <option value="priceHigh">Price: High to Low</option>
+                    <option value="nameAsc">Name: A to Z</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+          </aside>
+
+          <section>
+            <div class="results-row">
+              <p id="resultsCount" class="results-count">Loading products...</p>
+              <a class="btn btn-outline" href="/how-it-works.html">How ordering works</a>
+            </div>
+
+            <div class="product-grid" id="exploreProductsGrid">
+              <p>Loading products...</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="currentYear"></span> HATTAH. All rights reserved.</p>
+        <a href="/sellers.html">Become a Curated Seller</a>
+      </div>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/explore.js"></script>
+  </body>
+</html>

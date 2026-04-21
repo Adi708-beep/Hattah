@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HATTAH | Discover Hidden Brands</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="announce">
+      <div class="container announce-inner">
+        <p>New curated drops weekly. No marketplace noise. Just standout brands.</p>
+        <a href="/sellers.html">Become a Seller</a>
+      </div>
+    </div>
+
+    <header class="navbar">
+      <div class="container nav-wrapper">
+        <a class="logo" href="/index.html">HAT<span>TAH</span></a>
+        <button class="nav-toggle" aria-label="Toggle Menu">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a data-nav href="/index.html">Home</a></li>
+          <li><a data-nav href="/explore.html">Explore</a></li>
+          <li><a data-nav href="/sellers.html">Sellers</a></li>
+          <li><a data-nav href="/how-it-works.html">How It Works</a></li>
+        </ul>
+        <div class="nav-search">
+          <input class="search-input" type="text" placeholder="Search products" />
+        </div>
+        <div class="nav-actions">
+          <button class="icon-btn" aria-label="Search">S</button>
+          <button class="icon-btn" aria-label="Wishlist">♡</button>
+          <button class="icon-btn badged" aria-label="Bag">B</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content fade-up">
+              <span class="eyebrow">Curated Discovery Platform</span>
+              <h1 class="hero-title">Discover Hidden Brands Before They Blow Up</h1>
+              <p class="hero-desc">
+                HATTAH is a curated discovery platform for underrated Instagram sellers.
+                Browse unique products, then submit direct order requests to sellers.
+              </p>
+              <div class="button-group">
+                <a class="btn btn-primary" href="/explore.html">Shop Curated Products</a>
+                <a class="btn btn-outline" href="/how-it-works.html">See How It Works</a>
+              </div>
+
+              <div class="stats-strip">
+                <article class="stat-item">
+                  <strong>500+</strong>
+                  <span>Curated products listed</span>
+                </article>
+                <article class="stat-item">
+                  <strong>120+</strong>
+                  <span>Independent brands featured</span>
+                </article>
+                <article class="stat-item">
+                  <strong>24h</strong>
+                  <span>Average seller response</span>
+                </article>
+              </div>
+            </div>
+
+            <div class="hero-media fade-up-delay">
+              <img
+                src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=1200&q=80"
+                alt="Fashion editorial showcasing premium outerwear"
+                loading="eager"
+              />
+              <div class="hero-media-overlay">
+                <p>
+                  New drop: Urban Outerwear Collection. Discover statement pieces
+                  from rising designers this week.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container section-shell">
+          <span class="eyebrow">Trending Now</span>
+          <h2 class="section-title">Featured Products</h2>
+          <p class="section-subtitle">
+            Handpicked product picks from fast-growing creators.
+          </p>
+          <div class="product-grid" id="featuredProductsGrid">
+            <p>Loading featured products...</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container section-shell">
+          <span class="eyebrow">Shop By Category</span>
+          <h2 class="section-title">Explore Your Style Lane</h2>
+          <p class="section-subtitle">Jump into categories and discover new favorites.</p>
+          <div class="category-list">
+            <button class="category-chip" data-category="Fashion">Fashion</button>
+            <button class="category-chip" data-category="Beauty">Beauty</button>
+            <button class="category-chip" data-category="Home">Home</button>
+            <button class="category-chip" data-category="Accessories">Accessories</button>
+            <button class="category-chip" data-category="Bags">Bags</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container section-shell">
+          <span class="eyebrow">For Sellers</span>
+          <h2 class="section-title">Ready To Scale Your Brand Visibility?</h2>
+          <p class="section-subtitle">
+            Get featured in a focused discovery environment built for product-first
+            Instagram businesses.
+          </p>
+          <div class="button-group">
+            <a class="btn btn-primary" href="/onboarding.html">Apply For Onboarding</a>
+            <a class="btn btn-outline" href="/sellers.html">Learn More</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="currentYear"></span> HATTAH. All rights reserved.</p>
+        <a href="/sellers.html">Become a Curated Seller</a>
+      </div>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

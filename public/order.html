@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request Order | HATTAH</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="announce">
+      <div class="container announce-inner">
+        <p>No payment on platform. Seller contacts you directly after request.</p>
+        <a href="/how-it-works.html">Read Process</a>
+      </div>
+    </div>
+
+    <header class="navbar">
+      <div class="container nav-wrapper">
+        <a class="logo" href="/index.html">HAT<span>TAH</span></a>
+        <button class="nav-toggle" aria-label="Toggle Menu">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a data-nav href="/index.html">Home</a></li>
+          <li><a data-nav href="/explore.html">Explore</a></li>
+          <li><a data-nav href="/sellers.html">Sellers</a></li>
+          <li><a data-nav href="/how-it-works.html">How It Works</a></li>
+        </ul>
+        <div class="nav-search">
+          <input class="search-input" type="text" placeholder="Search products" />
+        </div>
+        <div class="nav-actions">
+          <button class="icon-btn" aria-label="Search">S</button>
+          <button class="icon-btn" aria-label="Wishlist">♡</button>
+          <button class="icon-btn badged" aria-label="Bag">B</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <div class="page-head">
+          <span class="eyebrow">Order Request</span>
+          <h1 class="section-title">Request This Product</h1>
+        </div>
+        <p class="section-subtitle">
+          Fill the form and the seller will fulfill your request directly.
+        </p>
+
+        <div class="form-layout">
+          <aside class="card support-card">
+            <h3>Selected Product</h3>
+            <div id="orderProductInfo">
+              <p>Loading selected product...</p>
+            </div>
+            <p class="card-meta mt-9">
+              Seller will contact you directly on submitted phone number and confirm
+              product details before fulfillment.
+            </p>
+          </aside>
+
+          <form id="orderForm" class="form">
+            <input id="productId" name="productId" type="hidden" />
+
+            <div class="form-grid two-col">
+              <div>
+                <label class="label" for="customerName">Name</label>
+                <input
+                  class="input"
+                  id="customerName"
+                  name="customerName"
+                  type="text"
+                  required
+                />
+              </div>
+
+              <div>
+                <label class="label" for="customerEmail">Email</label>
+                <input
+                  class="input"
+                  id="customerEmail"
+                  name="customerEmail"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-grid two-col mt-9">
+              <div>
+                <label class="label" for="phone">Phone</label>
+                <input class="input" id="phone" name="phone" type="tel" required />
+              </div>
+
+              <div>
+                <label class="label" for="quantity">Quantity</label>
+                <input
+                  class="input"
+                  id="quantity"
+                  name="quantity"
+                  type="number"
+                  min="1"
+                  value="1"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="mt-9">
+              <label class="label" for="address">Address</label>
+              <textarea
+                class="textarea"
+                id="address"
+                name="address"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <div class="mt-9">
+              <label class="label" for="notes">Notes</label>
+              <input
+                class="input"
+                id="notes"
+                name="notes"
+                type="text"
+                placeholder="Any sizing, color, or delivery notes"
+              />
+            </div>
+
+            <div class="mt-10 button-group">
+              <button class="btn btn-primary" type="submit">Submit Order Request</button>
+              <a class="btn btn-outline" href="/explore.html">Back to Explore</a>
+            </div>
+
+            <div id="orderMessage" class="message"></div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="currentYear"></span> HATTAH. All rights reserved.</p>
+        <a href="/sellers.html">Become a Curated Seller</a>
+      </div>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/order.js"></script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Onboarding | HATTAH</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="announce">
+      <div class="container announce-inner">
+        <p>Application review usually completes within 3 business days.</p>
+        <a href="/sellers.html">Seller Benefits</a>
+      </div>
+    </div>
+
+    <header class="navbar">
+      <div class="container nav-wrapper">
+        <a class="logo" href="/index.html">HAT<span>TAH</span></a>
+        <button class="nav-toggle" aria-label="Toggle Menu">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a data-nav href="/index.html">Home</a></li>
+          <li><a data-nav href="/explore.html">Explore</a></li>
+          <li><a data-nav href="/sellers.html">Sellers</a></li>
+          <li><a data-nav href="/how-it-works.html">How It Works</a></li>
+        </ul>
+        <div class="nav-search">
+          <input class="search-input" type="text" placeholder="Search products" />
+        </div>
+        <div class="nav-actions">
+          <button class="icon-btn" aria-label="Search">S</button>
+          <button class="icon-btn" aria-label="Wishlist">♡</button>
+          <button class="icon-btn badged" aria-label="Bag">B</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <div class="page-head">
+          <span class="eyebrow">Apply To Join</span>
+          <h1 class="section-title">Seller Onboarding Form</h1>
+        </div>
+        <p class="section-subtitle">
+          Tell us about your brand. We review each submission before listing.
+        </p>
+
+        <div class="form-layout">
+          <aside class="card support-card">
+            <h3>What We Evaluate</h3>
+            <ul class="feature-list">
+              <li>Brand identity and originality of products</li>
+              <li>Product presentation quality</li>
+              <li>Category fit with HATTAH curation</li>
+              <li>Reliable communication and fulfillment intent</li>
+            </ul>
+            <p class="card-meta">
+              Accepted sellers are contacted with listing next steps and brand profile setup.
+            </p>
+          </aside>
+
+          <form id="onboardingForm" class="form">
+            <div class="form-grid two-col">
+              <div>
+                <label class="label" for="brandName">Brand Name</label>
+                <input class="input" id="brandName" name="brandName" type="text" required />
+              </div>
+              <div>
+                <label class="label" for="instagramHandle">Instagram Handle</label>
+                <input
+                  class="input"
+                  id="instagramHandle"
+                  name="instagramHandle"
+                  type="text"
+                  placeholder="@yourbrand"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-grid two-col mt-9">
+              <div>
+                <label class="label" for="category">Category</label>
+                <input class="input" id="category" name="category" type="text" required />
+              </div>
+              <div>
+                <label class="label" for="contactInfo">Contact Info</label>
+                <input
+                  class="input"
+                  id="contactInfo"
+                  name="contactInfo"
+                  type="text"
+                  placeholder="Email or phone"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="mt-9">
+              <label class="label" for="sampleProductLink">Sample Product Link</label>
+              <input
+                class="input"
+                id="sampleProductLink"
+                name="sampleProductLink"
+                type="url"
+                placeholder="https://instagram.com/..."
+                required
+              />
+            </div>
+
+            <div class="mt-10 button-group">
+              <button class="btn btn-primary" type="submit">Submit Application</button>
+              <a class="btn btn-outline" href="/sellers.html">Back To Sellers</a>
+            </div>
+
+            <div id="onboardingMessage" class="message"></div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="currentYear"></span> HATTAH. All rights reserved.</p>
+        <a href="/sellers.html">Back to Sellers Page</a>
+      </div>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/onboarding.js"></script>
+  </body>
+</html>
