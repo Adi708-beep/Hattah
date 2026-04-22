@@ -91,20 +91,37 @@ const getProducts = async (req, res) => {
 
 const getProductById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const productId = req.params.id;
+    
+    // First check default products (for fallback when DB is unavailable)
+    const defaultProduct = DEFAULT_PRODUCTS.find(p => p._id.toString() === productId);
+    if (defaultProduct) {
+      console.log(`✅ Found product ${productId} in defaults`);
+      return res.status(200).json({
+        success: true,
+        data: defaultProduct,
+      });
+    }
+
+    // Then try database
+    console.log(`🔍 Searching database for product ${productId}`);
+    const product = await Product.findById(productId).maxTimeMS(5000);
 
     if (!product) {
+      console.warn(`⚠️ Product ${productId} not found`);
       return res.status(404).json({
         success: false,
         message: "Product not found",
       });
     }
 
+    console.log(`✅ Found product ${productId} in database`);
     return res.status(200).json({
       success: true,
       data: product,
     });
   } catch (error) {
+    console.error("❌ Error fetching product:", error.message);
     return res.status(500).json({
       success: false,
       message: "Failed to fetch product",
