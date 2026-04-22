@@ -3,7 +3,9 @@ const getAPIBaseURL = () => {
   if (typeof window !== "undefined") {
     const protocol = window.location.protocol;
     const host = window.location.host;
-    return `${protocol}//${host}/api`;
+    const baseURL = `${protocol}//${host}/api`;
+    console.log("API Base URL:", baseURL);
+    return baseURL;
   }
   return "http://localhost:5000/api";
 };
@@ -54,17 +56,25 @@ const apiRequest = async (endpoint, options = {}) => {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const url = `${API_BASE_URL}${endpoint}`;
+    console.log("API Request:", url);
+    
+    const response = await fetch(url, {
       headers: requestHeaders,
       ...restOptions,
     });
 
+    const payload = await response.json().catch(() => ({
+      message: `HTTP ${response.status}`,
+    }));
+
     if (!response.ok) {
-      const payload = await response.json();
-      throw new Error(payload.message || `API Error: ${response.status}`);
+      const errorMessage = payload.message || `API Error: ${response.status}`;
+      console.error("API Error:", errorMessage, payload);
+      throw new Error(errorMessage);
     }
 
-    const payload = await response.json();
+    console.log("API Response:", payload);
     return payload;
   } catch (error) {
     console.error("API Request Error:", error);
