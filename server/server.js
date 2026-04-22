@@ -119,13 +119,17 @@ const connectDB = async () => {
   }
 
   try {
+    console.log("🔄 Establishing MongoDB connection...");
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 10000,
-      socketTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 8000,
+      socketTimeoutMS: 8000,
       maxPoolSize: 10,
-      minPoolSize: 2,
+      minPoolSize: 1,
+      family: 4,
+      waitQueueTimeoutMS: 10000,
+      connectTimeoutMS: 10000,
     });
     isConnected = true;
     console.log("✅ MongoDB connected successfully");
@@ -137,12 +141,19 @@ const connectDB = async () => {
 };
 
 // Middleware to ensure DB connection
+let dbConnecting = false;
 app.use(async (req, res, next) => {
   try {
-    await connectDB();
+    if (!isConnected && !dbConnecting) {
+      dbConnecting = true;
+      await connectDB();
+      dbConnecting = false;
+    }
     next();
   } catch (error) {
-    console.error("DB connection middleware error:", error);
+    console.error("❌ DB connection middleware error:", error.message);
+    dbConnecting = false;
+    // Continue anyway - routes will handle errors
     next();
   }
 });

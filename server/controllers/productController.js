@@ -2,11 +2,13 @@ const Product = require("../models/Product");
 
 const getProducts = async (req, res) => {
   try {
+    console.log("📦 Processing GET /api/products request");
     const { category, minPrice, maxPrice } = req.query;
     const query = {};
 
     if (category) {
       query.category = category;
+      console.log(`🔍 Filtering by category: ${category}`);
     }
 
     if (minPrice || maxPrice) {
@@ -19,16 +21,20 @@ const getProducts = async (req, res) => {
       if (maxPrice) {
         query.price.$lte = Number(maxPrice);
       }
+      console.log(`💰 Filtering by price:`, query.price);
     }
 
-    const products = await Product.find(query).sort({ createdAt: -1 });
+    console.log("⏳ Executing database query...");
+    const products = await Product.find(query).sort({ createdAt: -1 }).maxTimeMS(8000);
 
+    console.log(`✅ Found ${products.length} products`);
     return res.status(200).json({
       success: true,
       count: products.length,
       data: products,
     });
   } catch (error) {
+    console.error("❌ Error fetching products:", error.message);
     return res.status(500).json({
       success: false,
       message: "Failed to fetch products",
