@@ -44,6 +44,7 @@ const seedProductsIfEmpty = async () => {
   try {
     const count = await Product.countDocuments();
     if (count > 0) {
+      console.log(`✅ Database ready with ${count} products`);
       return;
     }
 
@@ -97,8 +98,9 @@ const seedProductsIfEmpty = async () => {
         sellerName: "MoonMint Atelier",
       },
     ]);
+    console.log("✅ Products seeded successfully");
   } catch (error) {
-    console.error("Error seeding products:", error.message);
+    console.error("❌ Error seeding products:", error.message);
   }
 };
 
@@ -113,14 +115,14 @@ const connectDB = async () => {
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
     });
     isConnected = true;
-    console.log("MongoDB connected successfully");
+    console.log("✅ MongoDB connected successfully");
     await seedProductsIfEmpty();
   } catch (error) {
-    console.error("MongoDB connection error:", error.message);
+    console.error("❌ MongoDB connection error:", error.message);
     isConnected = false;
-    throw error;
   }
 };
 
@@ -136,9 +138,10 @@ app.use(async (req, res, next) => {
 });
 
 // Start server only in non-serverless environment
-if (!process.env.VERCEL) {
+if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    connectDB();
   });
 }
 
