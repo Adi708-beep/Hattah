@@ -19,6 +19,13 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/hattah
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Request logging for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "../public")));
 
 // Health check
@@ -115,7 +122,10 @@ const connectDB = async () => {
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 10000,
+      maxPoolSize: 10,
+      minPoolSize: 2,
     });
     isConnected = true;
     console.log("✅ MongoDB connected successfully");
