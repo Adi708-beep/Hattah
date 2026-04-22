@@ -199,6 +199,25 @@ img {
   place-items: center;
 }
 
+.admin-link {
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #1e90ff 100%);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+  display: inline-block;
+}
+
+.admin-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.5);
+  background: linear-gradient(135deg, #1e90ff 0%, var(--accent) 100%);
+}
+
 .section {
   padding: 3.4rem 0;
 }
