@@ -123,37 +123,51 @@ const connectDB = async () => {
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 8000,
-      socketTimeoutMS: 8000,
-      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      maxPoolSize: 5,
       minPoolSize: 1,
       family: 4,
       waitQueueTimeoutMS: 10000,
       connectTimeoutMS: 10000,
     });
+    
+    // Warm up the connection
+    await Product.countDocuments();
+    
     isConnected = true;
-    console.log("✅ MongoDB connected successfully");
+    console.log("✅ MongoDB connected and verified");
     await seedProductsIfEmpty();
   } catch (error) {
     console.error("❌ MongoDB connection error:", error.message);
     isConnected = false;
+    throw error;
   }
 };
 
 // Middleware to ensure DB connection
 let dbConnecting = false;
+let connectionAttempts = 0;
+
 app.use(async (req, res, next) => {
   try {
     if (!isConnected && !dbConnecting) {
       dbConnecting = true;
-      await connectDB();
+      connectionAttempts++;
+      console.log(`🔗 Connection attempt #${connectionAttempts}`);
+      
+      try {
+        await connectDB();
+      } catch (error) {
+        console.error(`❌ Connection attempt #${connectionAttempts} failed:`, error.message);
+      }
+      
       dbConnecting = false;
     }
     next();
   } catch (error) {
-    console.error("❌ DB connection middleware error:", error.message);
+    console.error("❌ Middleware error:", error.message);
     dbConnecting = false;
-    // Continue anyway - routes will handle errors
     next();
   }
 });
