@@ -178,6 +178,10 @@ if (require.main === module) {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
     connectDB();
   });
+} else {
+  // For Vercel serverless, warm up connection immediately on module load
+  console.log("📦 Vercel serverless detected, warming up MongoDB connection...");
+  connectDB().catch(err => console.error("❌ Warmup failed:", err.message));
 }
 
 module.exports = app;
