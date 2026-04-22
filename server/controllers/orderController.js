@@ -1,5 +1,7 @@
 const Order = require("../models/Order");
 const Product = require("../models/Product");
+const mongoose = require("mongoose");
+const { findDefaultProductById } = require("../data/defaultProducts");
 const { sendOrderConfirmationEmail } = require("../services/emailService");
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,14 +27,27 @@ const createOrder = async (req, res) => {
       });
     }
 
-    const product = await Product.findById(productId);
+    const normalizedProductId = String(productId || "").trim();
+    const product = mongoose.Types.ObjectId.isValid(normalizedProductId)
+      ? await Product.findById(normalizedProductId)
+      : null;
+    const fallbackProduct = product || findDefaultProductById(normalizedProductId);
 
-    if (!product) {
+    if (!fallbackProduct) {
       return res.status(404).json({
         success: false,
         message: "Selected product does not exist",
       });
     }
+
+    const productSnapshot = {
+      name: fallbackProduct.name,
+      price: fallbackProduct.price,
+      description: fallbackProduct.description,
+      imageUrl: fallbackProduct.imageUrl,
+      category: fallbackProduct.category,
+      sellerName: fallbackProduct.sellerName,
+    };
 
     const orderPayload = {
       customerName,
@@ -41,7 +56,8 @@ const createOrder = async (req, res) => {
       address,
       quantity: Number(quantity) || 1,
       notes: notes || "",
-      productId,
+      productId: normalizedProductId,
+      productSnapshot,
     };
 
     const order = await Order.create(orderPayload);
@@ -54,7 +70,7 @@ const createOrder = async (req, res) => {
         customerName,
         customerEmail: normalizedEmail,
         order,
-        product,
+        product: fallbackProduct,
       });
 
       emailSent = true;

@@ -45,7 +45,7 @@ img {
 }
 
 .container {
-  width: min(100% - 2rem, var(--container));
+  width: min(calc(100% - 2rem), var(--container));
   margin-inline: auto;
 }
 
@@ -107,6 +107,7 @@ img {
   background: transparent;
   color: #f3f6fd;
   font-size: 1.6rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-links {
@@ -154,6 +155,13 @@ img {
   background: rgba(255, 255, 255, 0.04);
   color: #f3f6fd;
   font: inherit;
+}
+
+.input,
+.select,
+.textarea,
+.icon-btn {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .search-input::placeholder {
@@ -873,7 +881,7 @@ img {
 /* Mobile Optimization: Extra Small Devices (< 360px) */
 @media (max-width: 359px) {
   .container {
-    width: 100% - 1rem;
+    width: min(calc(100% - 1rem), var(--container));
   }
 
   .section {
@@ -1025,8 +1033,9 @@ img {
     position: absolute;
     flex-direction: column;
     top: 72px;
+    left: 1rem;
     right: 1rem;
-    width: min(200px, calc(100% - 2rem));
+    width: auto;
     background: #121829;
     border: 1px solid var(--line);
     border-radius: 10px;
@@ -1042,7 +1051,7 @@ img {
     width: 44px;
     height: 44px;
     font-size: 1rem;
-    min-touch-target: 44px;
+    min-height: 44px;
   }
 
   .admin-link {
@@ -1148,11 +1157,17 @@ img {
   .results-row {
     flex-direction: column;
     gap: 0.6rem;
+    align-items: stretch;
   }
 
   .product-layout,
   .form-layout {
     grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .support-card {
+    order: -1;
   }
 
   .meta-grid {

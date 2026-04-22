@@ -165,7 +165,6 @@ const getAdminOrders = async (req, res) => {
     const [total, orders, statusRows] = await Promise.all([
       Order.countDocuments(query),
       Order.find(query)
-        .populate("productId", "name price sellerName category")
         .sort({ createdAt: -1 })
         .skip((page - 1) * limit)
         .limit(limit)

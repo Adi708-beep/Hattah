@@ -74,9 +74,25 @@ const formatDate = (value) => {
 };
 
 const formatAmount = (order) => {
-  const price = order.productId && order.productId.price ? order.productId.price : 0;
-  const total = price * order.quantity;
+  const productPrice =
+    order.productSnapshot && typeof order.productSnapshot.price === "number"
+      ? order.productSnapshot.price
+      : order.productId && order.productId.price
+      ? order.productId.price
+      : 0;
+  const total = productPrice * order.quantity;
   return window.HATTAH_API.formatCurrency(total);
+};
+
+const getOrderProductDetails = (order) => {
+  const snapshot = order.productSnapshot || {};
+  const product = order.productId && typeof order.productId === "object" ? order.productId : {};
+
+  return {
+    name: snapshot.name || product.name || "Removed Product",
+    sellerName: snapshot.sellerName || product.sellerName || "Unknown Seller",
+    category: snapshot.category || product.category || "",
+  };
 };
 
 const renderStatusSummary = (summary) => {
@@ -100,9 +116,7 @@ const renderOrders = (orders) => {
 
   ordersTableBody.innerHTML = orders
     .map((order) => {
-      const productName = order.productId && order.productId.name ? order.productId.name : "Removed Product";
-      const sellerName =
-        order.productId && order.productId.sellerName ? order.productId.sellerName : "Unknown Seller";
+      const productDetails = getOrderProductDetails(order);
       const normalizedStatus = order.orderStatus || "new";
       const statusClass = statusClassMap[normalizedStatus] || "status-new";
 
@@ -118,8 +132,9 @@ const renderOrders = (orders) => {
             <div class="small">${order.address}</div>
           </td>
           <td>
-            <strong>${productName}</strong>
-            <div class="small">Seller: ${sellerName}</div>
+            <strong>${productDetails.name}</strong>
+            <div class="small">Seller: ${productDetails.sellerName}</div>
+            ${productDetails.category ? `<div class="small">Category: ${productDetails.category}</div>` : ""}
           </td>
           <td>${formatAmount(order)}</td>
           <td>

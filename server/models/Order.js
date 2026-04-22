@@ -51,9 +51,16 @@ const orderSchema = new mongoose.Schema(
       default: "",
     },
     productId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+      type: mongoose.Schema.Types.Mixed,
       required: true,
+    },
+    productSnapshot: {
+      name: { type: String, trim: true, maxlength: 120, default: "" },
+      price: { type: Number, min: 0, default: 0 },
+      description: { type: String, trim: true, maxlength: 1000, default: "" },
+      imageUrl: { type: String, trim: true, default: "" },
+      category: { type: String, trim: true, maxlength: 80, default: "" },
+      sellerName: { type: String, trim: true, maxlength: 120, default: "" },
     },
   },
   {
