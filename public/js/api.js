@@ -1,4 +1,14 @@
-const API_BASE_URL = "http://localhost:5000/api";
+// Get dynamic API URL based on environment
+const getAPIBaseURL = () => {
+  if (typeof window !== "undefined") {
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    return `${protocol}//${host}/api`;
+  }
+  return "http://localhost:5000/api";
+};
+
+const API_BASE_URL = getAPIBaseURL();
 const ADMIN_TOKEN_KEY = "hattahAdminToken";
 const ADMIN_PROFILE_KEY = "hattahAdminProfile";
 
@@ -43,18 +53,23 @@ const apiRequest = async (endpoint, options = {}) => {
     }
   }
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    headers: requestHeaders,
-    ...restOptions,
-  });
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      headers: requestHeaders,
+      ...restOptions,
+    });
 
-  const payload = await response.json();
+    if (!response.ok) {
+      const payload = await response.json();
+      throw new Error(payload.message || `API Error: ${response.status}`);
+    }
 
-  if (!response.ok) {
-    throw new Error(payload.message || "Request failed");
+    const payload = await response.json();
+    return payload;
+  } catch (error) {
+    console.error("API Request Error:", error);
+    throw error;
   }
-
-  return payload;
 };
 
 const formatCurrency = (amount) =>

@@ -23,7 +23,7 @@ const renderProducts = (products) => {
   }
 
   if (!products.length) {
-    exploreProductsGrid.innerHTML = "<p>No products match your filters.</p>";
+    exploreProductsGrid.innerHTML = "<p class='error-message'>No products match your filters.</p>";
     return;
   }
 
@@ -32,7 +32,7 @@ const renderProducts = (products) => {
       (product) => `
         <article class="card">
           <a href="/product.html?id=${product._id}">
-            <img class="card-media" src="${product.imageUrl}" alt="${product.name}" loading="lazy" />
+            <img class="card-media" src="${product.imageUrl}" alt="${product.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22165%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22220%22 height=%22165%22/%3E%3C/svg%3E'" />
             <div class="card-content">
               <h3 class="card-title">${product.name}</h3>
               <p class="card-meta">${product.category} · ${product.sellerName}</p>
@@ -100,19 +100,33 @@ const populateCategoryOptions = (products) => {
 
 const loadProducts = async () => {
   try {
-    const response = await window.HATTAH_API.apiRequest("/products");
-    allProducts = response.data;
-    populateCategoryOptions(allProducts);
-
-    const initialCategory = new URLSearchParams(window.location.search).get("category");
-
-    if (initialCategory) {
-      categoryFilter.value = initialCategory;
+    if (exploreProductsGrid) {
+      exploreProductsGrid.innerHTML = '<div class="loading-skeleton"></div>';
     }
+    const response = await window.HATTAH_API.apiRequest("/products");
+    if (response && response.data && Array.isArray(response.data)) {
+      allProducts = response.data;
+      populateCategoryOptions(allProducts);
 
-    applyFilters();
+      const initialCategory = new URLSearchParams(window.location.search).get("category");
+
+      if (initialCategory) {
+        categoryFilter.value = initialCategory;
+      }
+
+      applyFilters();
+    } else {
+      throw new Error("Invalid product data format");
+    }
   } catch (error) {
-    exploreProductsGrid.innerHTML = `<p>${error.message}</p>`;
+    console.error("Error loading products:", error);
+    exploreProductsGrid.innerHTML = `
+      <div class="error-message" style="grid-column: 1/-1;">
+        <p>Unable to load products</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #999;">Error: ${error.message}</p>
+        <button onclick="location.reload()" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">Retry</button>
+      </div>
+    `;
   }
 };
 
